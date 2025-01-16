@@ -8,8 +8,12 @@ on:
         required: true
 
 jobs:
-  docker:
+  build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        platform: [linux/amd64 ,linux/arm64, linux/arm/v7]
+
     steps:
 
       - name: Checkout
@@ -32,7 +36,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          platforms: linux/amd64,linux/arm64,linux/arm/v7
+          platforms: ${{ matrix.platform }}
           push: true
           tags: |
             ghcr.io/${{ github.repository_owner }}/hass-super:latest

@@ -37,6 +37,6 @@ apt-get -y -qq install docker-ce-cli containerd.io docker-compose-plugin docker-
 apt-get -y -qq install iptables libip6tc2 libnetfilter-conntrack3 libnfnetlink0 libnftnl11 netbase >/dev/null
 
 ARCH=$(uname -m)
-wget -O /opt/os-agent.deb "https://github.com/home-assistant/os-agent/releases/download/1.6.0/os-agent_1.6.0_linux_$ARCH.deb"
-wget -O /opt/hassio.deb "https://github.com/home-assistant/supervised-installer/releases/latest/download/homeassistant-supervised.deb"
-wget -O /opt/hasscn.deb "https://github.com/hasscc/supervised-installer/releases/latest/download/homeassistant-supervised.deb"
+wget --tries=3 -O /opt/os-agent.deb "https://github.com/home-assistant/os-agent/releases/download/1.6.0/os-agent_1.6.0_linux_$ARCH.deb"
+wget --tries=3 -O /opt/hassio.deb "https://github.com/home-assistant/supervised-installer/releases/latest/download/homeassistant-supervised.deb"
+wget --tries=3 -O /opt/hasscn.deb "https://github.com/hasscc/supervised-installer/releases/latest/download/homeassistant-supervised.deb"
