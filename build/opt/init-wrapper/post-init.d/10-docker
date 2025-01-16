@@ -1,0 +1,15 @@
+#! /bin/sh
+
+set -ex
+
+if [ -f /usr/bin/dockerd ]; then
+  exit 0
+fi
+
+if [ $(cat /etc/timezone) = "Asia/Shanghai" ]; then
+  sed -i 's@download.docker.com@mirrors.ustc.edu.cn/docker-ce@g' /etc/apt/sources.list.d/docker.list
+  apt-get update
+fi
+
+apt-get install --no-install-recommends -y docker-ce
+docker version

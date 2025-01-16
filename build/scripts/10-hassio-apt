@@ -1,0 +1,42 @@
+#! /bin/sh
+
+set -ex
+
+apt-get install --no-install-recommends -y \
+apparmor \
+bluez \
+ca-certificates \
+cifs-utils \
+curl \
+dbus \
+iproute2 \
+jq \
+libglib2.0-bin \
+lsb-release \
+network-manager \
+nfs-common \
+systemd-journal-remote \
+systemd-resolved \
+udisks2 \
+wget
+
+
+DOWNLOAD_URL="https://download.docker.com"
+if [ "$DEFAULT_TZ" = "Asia/Shanghai" ]; then
+  DOWNLOAD_URL="https://mirrors.ustc.edu.cn/docker-ce"
+fi
+
+install -m 0755 -d /etc/apt/keyrings
+curl -fsSL "$DOWNLOAD_URL/linux/debian/gpg" -o /etc/apt/keyrings/docker.asc
+chmod a+r /etc/apt/keyrings/docker.asc
+
+arch=$(dpkg --print-architecture)
+echo "deb [arch=$arch signed-by=/etc/apt/keyrings/docker.asc] $DOWNLOAD_URL/linux/debian bookworm stable" > /etc/apt/sources.list.d/docker.list
+apt-get -qq update >/dev/null
+apt-get -y -qq install docker-ce-cli containerd.io docker-compose-plugin docker-ce-rootless-extras docker-buildx-plugin >/dev/null
+apt-get -y -qq install iptables libip6tc2 libnetfilter-conntrack3 libnfnetlink0 libnftnl11 netbase >/dev/null
+
+ARCH=$(uname -m)
+wget -O /opt/os-agent.deb "https://github.com/home-assistant/os-agent/releases/download/1.6.0/os-agent_1.6.0_linux_$ARCH.deb"
+wget -O /opt/hassio.deb "https://github.com/home-assistant/supervised-installer/releases/latest/download/homeassistant-supervised.deb"
+wget -O /opt/hasscn.deb "https://github.com/hasscc/supervised-installer/releases/latest/download/homeassistant-supervised.deb"

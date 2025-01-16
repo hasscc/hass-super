@@ -1,0 +1,9 @@
+#! /bin/sh
+
+set -ex
+
+if [ -f /usr/bin/os-agent ]; then
+  exit 0
+fi
+
+dpkg -i /opt/os-agent.deb

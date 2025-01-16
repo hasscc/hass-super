@@ -1,0 +1,23 @@
+#! /bin/sh
+
+set -e
+set -x
+export DEBIAN_FRONTEND=noninteractive
+
+apt-get install --no-install-recommends -y systemd systemd-sysv dbus libpam-systemd less
+apt-get install --no-install-recommends -y sudo openssh-server
+
+## use less for systemctl, journalctl
+echo '#export SYSTEMD_EDITOR='     >  /etc/profile.d/systemd-vars.sh
+echo 'export SYSTEMD_PAGER=less'   >> /etc/profile.d/systemd-vars.sh
+echo '#export SYSTEMD_LESS=FRSXMK' >> /etc/profile.d/systemd-vars.sh
+
+echo 'Defaults env_keep += "SYSTEMD_EDITOR SYSTEMD_PAGER SYSTEMD_LESS"' \
+  > /etc/sudoers.d/systemd-vars
+
+## disable tty1
+systemctl mask getty@tty1.service
+
+## disable systemd-timesyncd
+systemctl mask systemd-timesyncd.service
+

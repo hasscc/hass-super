@@ -1,0 +1,30 @@
+#! /bin/sh
+
+set -ex
+
+ARCH=$(uname -m)
+case ${ARCH} in
+    "arm" | "armv6l" | "armv7l")
+        export MACHINE=${MACHINE:=qemuarm}
+    ;;
+    "aarch64")
+        export MACHINE=${MACHINE:=qemuarm-64}
+    ;;
+esac
+
+xargs -0 -n1 < /proc/1/environ | sed "s/=\(.*\)/='\1'/" | while read line; do
+    export "$line"
+done
+env >> /tmp/hassio.log
+
+mount --make-shared "${DATA_SHARE:=/usr/share/hassio}"
+
+if [ -f /usr/sbin/hassio-supervisor ]; then
+    exit 0
+fi
+
+deb="/opt/hassio.deb"
+if [ $(cat /etc/timezone) = "Asia/Shanghai" ]; then
+    deb="/opt/hasscn.deb"
+fi
+dpkg --force-confdef --force-confold -i $deb
