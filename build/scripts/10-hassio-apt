@@ -38,8 +38,8 @@ apt-get -y -qq install iptables libip6tc2 libnetfilter-conntrack3 libnfnetlink0 
 
 ARCH=$(uname -m)
 case ${ARCH} in
-    "armv6l" | "armv7l")
-        ARCH=${ARCH/l/}
+    "armv7l")
+        ARCH="armv7"
     ;;
 esac
 wget --tries=3 -O /opt/os-agent.deb "https://github.com/home-assistant/os-agent/releases/download/1.6.0/os-agent_1.6.0_linux_$ARCH.deb"
