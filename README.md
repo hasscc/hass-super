@@ -25,6 +25,7 @@ volumes:
 ```
 
 > `docker_lib`用于存储HassIO容器及镜像等数据，会占用较大的空间
+> 仅当`DEFAULT_TZ=Asia/Shanghai`时才会对国内网络环境进行优化
 
 
 ### 命令安装
