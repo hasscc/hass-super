@@ -2,14 +2,9 @@
 
 set -ex
 
-ARCH=$(uname -m)
-case ${ARCH} in
-    "arm" | "armv6l" | "armv7l")
-        export MACHINE=${MACHINE:=qemuarm}
-    ;;
-    "aarch64")
-        export MACHINE=${MACHINE:=qemuarm-64}
-    ;;
+case $(uname -m) in
+    "aarch64" | "arm64") export MACHINE=${MACHINE:=qemuarm-64} ;;
+    "armv6l" | "armv7l") export MACHINE=${MACHINE:=qemuarm} ;;
 esac
 
 xargs -0 -n1 < /proc/1/environ | sed "s/=\(.*\)/='\1'/" | while read line; do
