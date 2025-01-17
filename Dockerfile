@@ -1,7 +1,6 @@
 FROM debian:bookworm
 
 ENV container=docker \
-    DOCKER_STORAGE_DRIVER=vfs \
     DEBIAN_FRONTEND=noninteractive
 
 COPY build /tmp/build

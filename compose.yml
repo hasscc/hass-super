@@ -1,11 +1,10 @@
 services:
   hass-super:
     container_name: hass-super
-    image: hasscc/hass-super
+    image: ghcr.nju.edu.cn/hasscc/hass-super
     restart: unless-stopped
     volumes:
       - ./hassio:/usr/share/hassio
-      - ./docker:/var/lib/docker
       - /run/dbus:/run/dbus:ro
     environment:
       - DEFAULT_TZ=Asia/Shanghai
