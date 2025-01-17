@@ -33,6 +33,7 @@ volumes:
 docker run -d \
   --name hass-super \
   --privileged \
+  --network=host \
   --restart=unless-stopped \
   -v /usr/share/hassio:/usr/share/hassio \
   -v /run/dbus:/run/dbus:ro \
