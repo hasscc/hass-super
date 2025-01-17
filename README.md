@@ -17,6 +17,8 @@ services:
       - docker_lib:/var/lib/docker
     environment:
       - DEFAULT_TZ=Asia/Shanghai
+    devices:
+      - /dev/net/tun
     privileged: true
     network_mode: host
 
@@ -36,12 +38,13 @@ volumes:
 ```bash
 docker run -d \
   --name hass-super \
-  --privileged \
-  --network=host \
-  --restart=unless-stopped \
   -v /usr/share/hassio:/usr/share/hassio \
   -v /run/dbus:/run/dbus:ro \
   -e DEFAULT_TZ=Asia/Shanghai \
+  --device /dev/net/tun \
+  --network=host \
+  --restart=unless-stopped \
+  --privileged \
   ghcr.nju.edu.cn/hasscc/hass-super
 ```
 

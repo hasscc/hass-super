@@ -9,6 +9,8 @@ services:
       - docker_lib:/var/lib/docker
     environment:
       - DEFAULT_TZ=Asia/Shanghai
+    devices:
+      - /dev/net/tun
     privileged: true
     network_mode: host
 
