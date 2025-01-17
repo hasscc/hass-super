@@ -24,6 +24,8 @@ volumes:
   docker_lib:
 ```
 
+> `./hassio`用于存储HassIO数据，包括HA配置及Add-ons配置等
+> 
 > `docker_lib`用于存储HassIO容器及镜像等数据，会占用较大的空间
 > 
 > 仅当`DEFAULT_TZ=Asia/Shanghai`时才会对国内网络环境进行优化
