@@ -6,7 +6,11 @@ services:
     volumes:
       - ./hassio:/usr/share/hassio
       - /run/dbus:/run/dbus:ro
+      - docker_lib:/var/lib/docker
     environment:
       - DEFAULT_TZ=Asia/Shanghai
     privileged: true
     network_mode: host
+
+volumes:
+  docker_lib:
