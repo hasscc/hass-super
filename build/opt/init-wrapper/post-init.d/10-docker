@@ -8,7 +8,7 @@ fi
 
 if [ $(cat /etc/timezone) = "Asia/Shanghai" ]; then
   sed -i 's@download.docker.com@mirrors.ustc.edu.cn/docker-ce@g' /etc/apt/sources.list.d/docker.list
-  curl -fsSL "https://mirrors.ustc.edu.cn/docker-ce/linux/debian/gpg" -o /etc/apt/keyrings/docker.asc
+  wget -t 3 --random-wait -O /etc/apt/keyrings/docker.asc "https://mirrors.ustc.edu.cn/docker-ce/linux/debian/gpg"
   apt-get -qq update >/dev/null
 fi
 

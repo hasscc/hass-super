@@ -15,9 +15,9 @@ env >> /tmp/hassio.log
 mount --make-shared "${DATA_SHARE:=/usr/share/hassio}"
 
 if [ -f /usr/sbin/hassio-supervisor ]; then
-    sleep 5
+    sleep 10
     ha core start >> /tmp/hassio.log
-    sleep 5
+    sleep 20
     ha core start >> /tmp/hassio.log
     exit 0
 fi
