@@ -2,6 +2,15 @@
 
 > 通过Docker安装[Home Assistant Supervised](https://github.com/home-assistant/supervised-installer) (HassIO)，并对国内网络环境进行优化
 
+| 　　　 | HAOS | Supervised | Container | Core |
+|:-----:|:----:|:----------:|:---------:|:----:|
+| 自动化 |  ✅  |     ✅     |     ✅    |  ✅  |
+| 仪表盘 |  ✅  |     ✅     |     ✅    |  ✅  |
+| 集　成 |  ✅  |     ✅     |     ✅    |  ✅  |
+| 加载项 |  ✅  |     ✅     |     ❌    |  ❌  |
+| 升　级 |  ✅  |     ✅     |     ❌    |  ❌  |
+| 备　份 |  ✅  |     ✅     |     ✅    |  ✅  |
+
 
 ### Compose 安装
 
