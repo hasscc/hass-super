@@ -55,5 +55,18 @@ docker run -d \
 > 通过`http://192.168.xx.xx:8123`进入Home Assistant
 
 
+### 问题排查
+
+> 如果安装后超过10分钟仍然无法进入Home Assistant，请尝试执行以下命令查看日志
+
+```bash
+docker exec -it hass-super cat /tmp/hassio.log
+docker exec -it hass-super docker logs hassio_supervisor
+docker exec -it hass-super journalctl -f -u hassio-supervisor -n 200
+docker exec -it hass-super ha core info
+docker exec -it hass-super ha core start
+```
+
+
 ### 鸣谢
 - [NJU Mirror](https://doc.nju.edu.cn/books/e1654/page/ghcr)
