@@ -66,6 +66,7 @@ docker run -d \
 
 ### 问题排查
 
+> 如果提示无网络连接`no host internet connection`，请尝试在[网络配置](https://my.home-assistant.io/redirect/network/)中禁用IPv6
 > 如果安装后超过10分钟仍然无法进入Home Assistant，请尝试执行以下命令查看日志
 
 ```bash
