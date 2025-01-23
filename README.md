@@ -71,7 +71,7 @@ docker run -d \
 > 如果安装后超过10分钟仍然无法进入Home Assistant，请尝试执行以下命令查看日志
 
 ```bash
-docker exec -it hass-super cat /tmp/hassio.log
+docker exec -it hass-super tail -f /tmp/hassio.log -n 500
 docker exec -it hass-super docker logs hassio_supervisor
 docker exec -it hass-super journalctl -f -u hassio-supervisor -n 200
 docker exec -it hass-super ha core info
