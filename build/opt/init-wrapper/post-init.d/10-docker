@@ -2,6 +2,10 @@
 
 set -ex
 
+if [ -f /usr/sbin/iptables-legacy ]; then
+  update-alternatives --set iptables /usr/sbin/iptables-legacy
+fi
+
 if [ -f /usr/bin/dockerd ]; then
   exit 0
 fi
