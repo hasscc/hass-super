@@ -21,6 +21,10 @@ udisks2 \
 wget
 
 
+# fix for Synology
+sed -i -e "s/ProtectSystem=true/ProtectSystem=false/" /lib/systemd/system/NetworkManager.service
+
+
 DOWNLOAD_URL="https://download.docker.com"
 if [ "$DEFAULT_TZ" = "Asia/Shanghai" ]; then
   DOWNLOAD_URL="https://mirrors.ustc.edu.cn/docker-ce"
