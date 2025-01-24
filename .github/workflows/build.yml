@@ -124,3 +124,13 @@ jobs:
         run: |
           docker buildx imagetools inspect ${{ env.DOCKERHUB_REPO }}:${{ steps.meta.outputs.version }}
           docker buildx imagetools inspect ${{ env.GITHUB_CR_REPO }}:${{ steps.meta.outputs.version }}
+
+  docker_pull:
+    runs-on: ubuntu-latest
+    needs:
+      - merge
+    timeout-minutes: 60
+    steps:
+      - name: Pull Docker Image
+        run: |
+          docker pull ghcr.nju.edu.cn/${{ github.repository_owner }}/hass-super:${{ github.event.inputs.version }}
