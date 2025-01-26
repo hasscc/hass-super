@@ -11,6 +11,7 @@ services:
       - DEFAULT_TZ=Asia/Shanghai
     devices:
       - /dev/net/tun
+    hostname: hassio
     privileged: true
     network_mode: host
 

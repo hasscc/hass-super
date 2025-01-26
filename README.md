@@ -28,6 +28,7 @@ services:
       - DEFAULT_TZ=Asia/Shanghai
     devices:
       - /dev/net/tun
+    hostname: hassio
     privileged: true
     network_mode: host
 
@@ -56,8 +57,9 @@ docker run -d \
   -v hass_super_docker:/var/lib/docker \
   -e DEFAULT_TZ=Asia/Shanghai \
   --device /dev/net/tun \
-  --network=host \
-  --restart=unless-stopped \
+  --restart unless-stopped \
+  --network host \
+  --hostname hassio \
   --privileged \
   ghcr.nju.edu.cn/hasscc/hass-super
 ```
@@ -77,9 +79,9 @@ docker run -d \
 
 ```bash
 docker exec -it hass-super tail -f /tmp/hassio.log -n 500
-docker exec -it hass-super docker logs -f hassio_supervisor
-docker exec -it hass-super journalctl -f -u hassio-supervisor -n 200
 docker exec -it hass-super journalctl -f -u docker -n 100
+docker exec -it hass-super journalctl -f -u hassio-supervisor -n 200
+docker exec -it hass-super docker logs -f hassio_supervisor
 docker exec -it hass-super ha core info
 docker exec -it hass-super ha core start
 ```
