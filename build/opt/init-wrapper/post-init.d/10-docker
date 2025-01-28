@@ -2,12 +2,6 @@
 
 set -ex
 
-if [ $(cat /etc/timezone) = "Asia/Shanghai" ]; then
-  sed -i 's@download.docker.com@mirrors.ustc.edu.cn/docker-ce@g' /etc/apt/sources.list.d/docker.list
-  wget -t 3 --random-wait -O /etc/apt/keyrings/docker.asc "https://mirrors.ustc.edu.cn/docker-ce/linux/debian/gpg" 2>/dev/null
-  apt-get -qq update >/dev/null
-fi
-
 if [ -f /var/run/docker.pid ]; then
   exit 0
 fi
