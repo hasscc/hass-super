@@ -6,8 +6,7 @@ if [ -f /var/run/docker.pid ]; then
   exit 0
 fi
 
-function install_docker()
-{
+function install_docker () {
   if [ -f /opt/docker.deb ]; then
     dpkg -i /opt/docker.deb
   else
