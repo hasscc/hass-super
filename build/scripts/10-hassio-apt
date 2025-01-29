@@ -26,16 +26,16 @@ sed -i -e "s/ProtectSystem=true/ProtectSystem=false/" /lib/systemd/system/Networ
 
 
 DOWNLOAD_URL="https://download.docker.com"
-if [ "$DEFAULT_TZ" = "Asia/Shanghai" ]; then
-  DOWNLOAD_URL="https://mirrors.ustc.edu.cn/docker-ce"
-fi
+DOCKER_CHINA="https://mirrors.ustc.edu.cn/docker-ce"
 
 install -m 0755 -d /etc/apt/keyrings
-curl -fsSL "$DOWNLOAD_URL/linux/debian/gpg" -o /etc/apt/keyrings/docker.asc
-chmod a+r /etc/apt/keyrings/docker.asc
+wget --tries=3 -O /etc/apt/keyrings/docker.asc "$DOWNLOAD_URL/linux/debian/gpg"
+wget --tries=3 -O /etc/apt/keyrings/dockcn.asc "$DOCKER_CHINA/linux/debian/gpg"
+chmod a+r /etc/apt/keyrings/docker*
 
 arch=$(dpkg --print-architecture)
 echo "deb [arch=$arch signed-by=/etc/apt/keyrings/docker.asc] $DOWNLOAD_URL/linux/debian bookworm stable" > /etc/apt/sources.list.d/docker.list
+echo "deb [arch=$arch signed-by=/etc/apt/keyrings/dockcn.asc] $DOCKER_CHINA/linux/debian bookworm stable" > /etc/apt/sources.list.d/docker.ustc
 apt-get -qq update >/dev/null
 apt-get -y -qq install docker-ce-cli containerd.io docker-compose-plugin docker-ce-rootless-extras docker-buildx-plugin >/dev/null
 apt-get -y -qq install iptables libip6tc2 libnetfilter-conntrack3 libnfnetlink0 libnftnl11 netbase >/dev/null
