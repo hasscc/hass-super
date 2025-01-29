@@ -23,7 +23,7 @@ wget
 
 # fix for Synology
 sed -i -e "s/ProtectSystem=true/ProtectSystem=false/" /lib/systemd/system/NetworkManager.service
-systemctl mask systemd-logind.service systemd-hostnamed.service
+systemctl mask systemd-logind.service systemd-hostnamed.service e2scrub_reap.service
 
 
 DOWNLOAD_URL="https://download.docker.com"
