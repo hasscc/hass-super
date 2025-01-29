@@ -5,7 +5,8 @@ if [ ! -f /etc/rc.local ]; then
   chmod +x /etc/rc.local
 fi
 
+now=$(date "+%Y-%m-%d %H:%M:%S")
 cmd="run-parts /opt/init-wrapper/post-init.d"
 
-echo "echo Started. >> /tmp/hassio.log" >> /etc/rc.local
+echo "echo '$now Started.' >> /tmp/hassio.log" >> /etc/rc.local
 echo "$cmd >> /tmp/hassio.log 2>&1" >> /etc/rc.local
