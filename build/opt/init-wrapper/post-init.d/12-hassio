@@ -14,16 +14,19 @@ env >> /tmp/hassio.log
 
 mount --make-shared "${DATA_SHARE:=/usr/share/hassio}"
 
-if [ -f /usr/sbin/hassio-supervisor ]; then
-    sleep 10
-    ha core start >> /tmp/hassio.log
-    sleep 20
-    ha core start >> /tmp/hassio.log
-    exit 0
-fi
-
 deb="/opt/hassio.deb"
 if [ $(cat /etc/timezone) = "Asia/Shanghai" ]; then
     deb="/opt/hasscn.deb"
 fi
 dpkg --force-confdef --force-confold -i $deb
+
+CHECK_TIMES=1
+while [ "$CHECK_TIMES" -le "3" ]; do
+  sleep 10
+  status=$(docker inspect -f '{{.State.Running}}' homeassistant 2>/dev/null)
+  if [ "$status" = "true" ]; then
+    exit 0
+  fi
+  ha core start >> /tmp/hassio.log
+  CHECK_TIMES=$((CHECK_TIMES + 1))
+done
