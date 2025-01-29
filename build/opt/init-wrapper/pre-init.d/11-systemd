@@ -1,0 +1,5 @@
+#! /bin/sh
+
+# fix for Synology
+mkdir -p /run/systemd/unit-root/bin
+mkdir -p /run/systemd/unit-root/lib/modules
