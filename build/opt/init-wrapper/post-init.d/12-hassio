@@ -1,6 +1,6 @@
 #! /bin/sh
 
-set -ex
+set -x
 
 case $(uname -m) in
     "aarch64" | "arm64") export MACHINE=${MACHINE:=qemuarm-64} ;;
