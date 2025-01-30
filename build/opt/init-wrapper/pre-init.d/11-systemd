@@ -1,0 +1,9 @@
+#! /bin/sh
+
+# fix for Synology
+mkdir -p /run/systemd/unit-root/bin
+mkdir -p /run/systemd/unit-root/lib/modules
+ls -al /run/systemd/unit-root >> /tmp/hassio.log
+
+sed -i -e "s/ProtectSystem=true/ProtectSystem=false/" /lib/systemd/system/NetworkManager.service
+systemctl mask systemd-tmpfiles-setup systemd-tmpfiles-clean

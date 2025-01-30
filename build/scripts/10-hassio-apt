@@ -45,8 +45,3 @@ esac
 wget --tries=3 -O /opt/os-agent.deb "https://github.com/home-assistant/os-agent/releases/download/1.6.0/os-agent_1.6.0_linux_$ARCH.deb"
 wget --tries=3 -O /opt/hassio.deb "https://github.com/home-assistant/supervised-installer/releases/latest/download/homeassistant-supervised.deb"
 wget --tries=3 -O /opt/hasscn.deb "https://github.com/hasscc/supervised-installer/releases/latest/download/homeassistant-supervised.deb"
-
-
-# fix for Synology
-sed -i -e "s/ProtectSystem=true/ProtectSystem=false/" /lib/systemd/system/NetworkManager.service
-systemctl mask systemd-logind.service systemd-hostnamed.service systemd-resolved.service e2scrub_reap.service
