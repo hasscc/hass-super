@@ -1,0 +1,12 @@
+[Unit]
+Description=Hass-Super Post init
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=run-parts /opt/init-wrapper/post-init.d
+StandardOutput=append:/tmp/hassio.log
+StandardError=append:/tmp/hassio.log
+
+[Install]
+WantedBy=multi-user.target

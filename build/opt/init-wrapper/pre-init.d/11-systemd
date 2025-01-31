@@ -1,9 +1,14 @@
 #! /bin/sh
 
 # fix for Synology
-mkdir -p /run/systemd/unit-root/bin
-mkdir -p /run/systemd/unit-root/lib/modules
-ls -al /run/systemd/unit-root >> /tmp/hassio.log
+sed -i "s/ProtectSystem=true/ProtectSystem=no/" /lib/systemd/system/NetworkManager.service
+sed -i "s/PrivateTmp=yes/PrivateTmp=no/" /lib/systemd/system/systemd-resolved.service
+sed -i "s/ProtectHome=yes/ProtectHome=no/" /lib/systemd/system/systemd-resolved.service
+sed -i "s/ProtectClock=yes/ProtectClock=no/" /lib/systemd/system/systemd-resolved.service
+sed -i "s/ProtectSystem=strict/ProtectSystem=no/" /lib/systemd/system/systemd-resolved.service
+sed -i "s/ProtectKernelLogs=yes/ProtectKernelLogs=no/" /lib/systemd/system/systemd-resolved.service
+sed -i "s/ProtectKernelModules=yes/ProtectKernelModules=no/" /lib/systemd/system/systemd-resolved.service
+systemctl mask systemd-logind systemd-hostnamed systemd-tmpfiles-setup e2scrub_reap
+systemctl enable post-init
 
-sed -i -e "s/ProtectSystem=true/ProtectSystem=false/" /lib/systemd/system/NetworkManager.service
-systemctl mask systemd-tmpfiles-setup systemd-tmpfiles-clean
+echo btrfs > /etc/docker-driver
