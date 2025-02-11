@@ -31,7 +31,7 @@ chmod a+r /etc/apt/keyrings/docker*
 
 arch=$(dpkg --print-architecture)
 echo "deb [arch=$arch signed-by=/etc/apt/keyrings/docker.asc] $DOWNLOAD_URL/linux/debian bookworm stable" > /etc/apt/sources.list.d/docker.list
-echo "deb [arch=$arch signed-by=/etc/apt/keyrings/dockcn.asc] $DOCKER_CHINA/linux/debian bookworm stable" > /etc/apt/sources.list.d/docker.ustc
+echo "deb [arch=$arch signed-by=/etc/apt/keyrings/dockcn.asc] $DOCKER_CHINA/linux/debian bookworm stable" > /opt/docker.ustc
 apt-get -qq update >/dev/null
 apt-get -y -qq install docker-ce-cli containerd.io docker-compose-plugin docker-ce-rootless-extras docker-buildx-plugin >/dev/null
 apt-get -y -qq install iptables libip6tc2 libnetfilter-conntrack3 libnfnetlink0 libnftnl11 netbase >/dev/null

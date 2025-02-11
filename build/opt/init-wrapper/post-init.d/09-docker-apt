@@ -3,6 +3,6 @@
 set -ex
 
 if [ $(cat /etc/timezone) = "Asia/Shanghai" ]; then
-  mv -f /etc/apt/sources.list.d/docker.ustc /etc/apt/sources.list.d/docker.list
+  cat /opt/docker.ustc > /etc/apt/sources.list.d/docker.list
   apt-get -qq update >/dev/null
 fi
