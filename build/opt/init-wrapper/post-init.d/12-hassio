@@ -25,9 +25,9 @@ while [ "$CHECK_TIMES" -le "5" ]; do
   sleep 10
   status=$(docker inspect -f '{{.State.Running}}' homeassistant 2>/dev/null)
   if [ "$status" = "true" ]; then
-    date "+%Y-%m-%d %H:%M:%S" >> /tmp/hassio.log
+    date "+%Y-%m-%d %H:%M:%S hass-supper is ok." >> /tmp/hassio.log
     exit 0
   fi
-  ha core start >> /tmp/hassio.log 2>&1
+  ha core start --no-progress --log-level debug >> /tmp/hassio.log 2>&1
   CHECK_TIMES=$((CHECK_TIMES + 1))
 done
