@@ -14,39 +14,15 @@
 
 ### Compose 安装
 
-```shell
+```bash
 HASSIO=/usr/share/hassio
 mkdir -p $HASSIO
 cd $HASSIO
-wget https://raw.githubusercontent.com/hasscc/hass-super/main/compose.yml
+wget https://ghrp2.hacs.vip/raw/hasscc/hass-super/main/compose.yml
 docker compose up -d
 ```
 
-```yaml
-services:
-  hass-super:
-    container_name: hass-super
-    image: ghcr.nju.edu.cn/hasscc/hass-super
-    restart: unless-stopped
-    volumes:
-      - /usr/share/hassio:/usr/share/hassio
-      - /run/dbus:/run/dbus:ro
-      - docker_lib:/var/lib/docker
-    environment:
-      - DEFAULT_TZ=Asia/Shanghai
-    devices:
-      - /dev/net/tun
-    hostname: hassio
-    privileged: true
-    network_mode: host
-    healthcheck:
-      test: [CMD-SHELL, curl -I localhost:8123 || exit 1]
-
-volumes:
-  docker_lib:
-```
-
-> `./hassio`用于存储HassIO数据，包括HA配置及Add-ons配置等
+> `/usr/share/hassio`用于存储HassIO数据，包括HA配置及Add-ons配置等，可更改为其他路径
 > 
 > `docker_lib`用于存储HassIO容器及镜像等数据，会占用较大的空间
 > 
