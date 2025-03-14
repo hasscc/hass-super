@@ -14,6 +14,14 @@
 
 ### Compose 安装
 
+```shell
+HASSIO=/usr/share/hassio
+mkdir -p $HASSIO
+cd $HASSIO
+wget https://raw.githubusercontent.com/hasscc/hass-super/main/compose.yml
+docker compose up -d
+```
+
 ```yaml
 services:
   hass-super:
@@ -21,7 +29,7 @@ services:
     image: ghcr.nju.edu.cn/hasscc/hass-super
     restart: unless-stopped
     volumes:
-      - ./hassio:/usr/share/hassio
+      - /usr/share/hassio:/usr/share/hassio
       - /run/dbus:/run/dbus:ro
       - docker_lib:/var/lib/docker
     environment:

@@ -4,7 +4,7 @@ services:
     image: ghcr.nju.edu.cn/hasscc/hass-super
     restart: unless-stopped
     volumes:
-      - ./hassio:/usr/share/hassio
+      - .:/usr/share/hassio
       - /run/dbus:/run/dbus:ro
       - docker_lib:/var/lib/docker
     environment:
