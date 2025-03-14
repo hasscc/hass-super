@@ -31,6 +31,8 @@ services:
     hostname: hassio
     privileged: true
     network_mode: host
+    healthcheck:
+      test: [CMD-SHELL, curl -I localhost:8123 || exit 1]
 
 volumes:
   docker_lib:
