@@ -24,7 +24,7 @@ docker compose up -d
 
 > `/usr/share/hassio`用于存储HassIO数据，包括HA配置及Add-ons配置等，可更改为其他路径
 > 
-> `docker_lib`用于存储HassIO容器及镜像等数据，会占用较大的空间
+> `compose.yml`中的`docker_lib`用于存储HassIO容器及镜像等数据，会占用较大的空间，且对存储驱动有特殊要求，不要挂载到本地目录
 > 
 > 仅当`DEFAULT_TZ=Asia/Shanghai`时才会对国内网络环境进行优化
 
@@ -51,6 +51,8 @@ docker run -d \
 ```
 
 > 首次安装时，需要较长时间安装环境及拉取镜像，请耐心等待
+>
+> `hass_super_docker`对存储驱动有特殊要求，不要挂载到本地目录
 > 
 > 通过`http://192.168.xx.xx:4357`可以查看系统状态
 > 
