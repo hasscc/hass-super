@@ -32,7 +32,7 @@ docker compose up -d
 ### 命令安装
 
 ```bash
-# 新建用于存储容器及镜像等数据的卷
+# 新建用于存储容器及镜像等数据的卷，对存储驱动有特殊要求，因此不能挂载到本地目录
 docker volume create hass_super_docker
 
 # 运行容器
@@ -51,8 +51,6 @@ docker run -d \
 ```
 
 > 首次安装时，需要较长时间安装环境及拉取镜像，请耐心等待
->
-> `hass_super_docker`对存储驱动有特殊要求，不要挂载到本地目录
 > 
 > 通过`http://192.168.xx.xx:4357`可以查看系统状态
 > 
