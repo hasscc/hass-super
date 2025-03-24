@@ -58,7 +58,10 @@ jobs:
         with:
           platforms: ${{ matrix.platform }}
           labels: ${{ steps.meta.outputs.labels }}
-          outputs: type=image,"name=${{ env.DOCKERHUB_REPO }},${{ env.GITHUB_CR_REPO }}",push-by-digest=true,name-canonical=true,push=true
+          tags: |
+            ${{ env.DOCKERHUB_REPO }}
+            ${{ env.GITHUB_CR_REPO }}
+          outputs: type=image,push-by-digest=true,name-canonical=true,push=true
 
       - name: Export digest
         run: |
@@ -127,10 +130,8 @@ jobs:
 
   docker_pull:
     runs-on: ubuntu-latest
-    needs:
-      - merge
-    timeout-minutes: 60
+    needs: merge
     steps:
       - name: Pull Docker Image
         run: |
-          docker pull ghcr.nju.edu.cn/${{ github.repository_owner }}/hass-super:${{ github.event.inputs.version }}
+          docker pull ghcr.nju.edu.cn/${{ env.DOCKERHUB_REPO }}:${{ github.event.inputs.version }}
