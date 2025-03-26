@@ -17,6 +17,7 @@ network-manager \
 nfs-common \
 systemd-journal-remote \
 systemd-resolved \
+systemd-timesyncd \
 udisks2 \
 wget
 
@@ -42,6 +43,6 @@ case ${ARCH} in
     "armv7l" | "armhf") ARCH="armv7" ;;
     "armv6l") ARCH="armv6" ;;
 esac
-wget --tries=3 -O /opt/os-agent.deb "https://github.com/home-assistant/os-agent/releases/download/1.6.0/os-agent_1.6.0_linux_$ARCH.deb"
+wget --tries=3 -O /opt/os-agent.deb "https://github.com/home-assistant/os-agent/releases/download/1.7.2/os-agent_1.7.2_linux_$ARCH.deb"
 wget --tries=3 -O /opt/hassio.deb "https://github.com/home-assistant/supervised-installer/releases/latest/download/homeassistant-supervised.deb"
 wget --tries=3 -O /opt/hasscn.deb "https://github.com/hasscc/supervised-installer/releases/latest/download/homeassistant-supervised.deb"

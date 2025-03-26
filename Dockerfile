@@ -1,6 +1,7 @@
 FROM debian:bookworm
 
 ENV container=docker \
+    DATA_SHARE=/usr/share/hassio \
     DEBIAN_FRONTEND=noninteractive
 
 COPY build /tmp/build
