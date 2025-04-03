@@ -15,14 +15,14 @@
 ### Compose 安装
 
 ```bash
-HASSIO=/usr/share/hassio
+HASSIO=/opt/hassio
 mkdir -p $HASSIO
 cd $HASSIO
 wget https://ghrp2.hacs.vip/raw/hasscc/hass-super/main/compose.yml
 docker compose up -d
 ```
 
-> `/usr/share/hassio`用于存储HassIO数据，包括HA配置及Add-ons配置等，可更改为其他路径
+> `/opt/hassio`用于存储HassIO数据(以前是`/usr/share/hassio`)，包括HA配置及Add-ons配置等，可更改为其他路径
 > 
 > `compose.yml`中的`docker_lib`用于存储HassIO容器及镜像等数据，会占用较大的空间，且对存储驱动有特殊要求，不要挂载到本地目录
 > 
@@ -38,7 +38,7 @@ docker volume create hass_super_docker
 # 运行容器
 docker run -d \
   --name hass-super \
-  -v /usr/share/hassio:/usr/share/hassio \
+  -v /opt/hassio:/var/lib/homeassistant \
   -v /run/dbus:/run/dbus:ro \
   -v hass_super_docker:/var/lib/docker \
   -e DEFAULT_TZ=Asia/Shanghai \

@@ -12,7 +12,7 @@ xargs -0 -n1 < /proc/1/environ | sed "s/=\(.*\)/='\1'/" | while read line; do
 done
 env >> /tmp/hassio.log
 
-mount --make-shared "${DATA_SHARE:=/usr/share/hassio}"
+mount --make-shared "${DATA_SHARE:=/var/lib/homeassistant}"
 
 deb="/opt/hassio.deb"
 if [ $(cat /etc/timezone) = "Asia/Shanghai" ]; then
