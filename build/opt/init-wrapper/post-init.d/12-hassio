@@ -12,7 +12,11 @@ xargs -0 -n1 < /proc/1/environ | sed "s/=\(.*\)/='\1'/" | while read line; do
 done
 env >> /tmp/hassio.log
 
-mount --make-shared "${DATA_SHARE:=/var/lib/homeassistant}"
+echo "DATA_SHARE=${DATA_SHARE:=/var/lib/homeassistant}"
+if [ -f "$DATA_SHARE/updater.json" ]; then
+  sed -i 's|ghcr\.io/|ghcr.nju.edu.cn/|g' "$DATA_SHARE/updater.json"
+  sed -i 's|/home-assistant/\(.*-hassio-supervisor\)|/hasscc/\1|g' "$DATA_SHARE/updater.json"
+fi
 
 deb="/opt/hassio.deb"
 if [ $(cat /etc/timezone) = "Asia/Shanghai" ]; then
@@ -21,7 +25,7 @@ fi
 DEBIAN_FRONTEND=noninteractive MACHINE=${MACHINE} dpkg --force-confdef --force-confold -i $deb
 
 CHECK_TIMES=1
-while [ "$CHECK_TIMES" -le "5" ]; do
+while [ "$CHECK_TIMES" -le "10" ]; do
   sleep 10
   status=$(docker inspect -f '{{.State.Running}}' homeassistant 2>/dev/null)
   if [ "$status" = "true" ]; then
