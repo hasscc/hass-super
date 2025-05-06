@@ -38,7 +38,7 @@ docker volume create hass_super_docker
 # 运行容器
 docker run -d \
   --name hass-super \
-  -v /opt/hassio:/var/lib/homeassistant \
+  -v /opt/hassio:/var/lib/homeassistant:shared \
   -v /run/dbus:/run/dbus:ro \
   -v hass_super_docker:/var/lib/docker \
   -e DEFAULT_TZ=Asia/Shanghai \

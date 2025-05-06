@@ -13,9 +13,13 @@ done
 env >> /tmp/hassio.log
 
 echo "DATA_SHARE=${DATA_SHARE:=/var/lib/homeassistant}"
+mount --make-shared "$DATA_SHARE" >> /tmp/hassio.log 2>&1
 if [ -f "$DATA_SHARE/updater.json" ]; then
   sed -i 's|ghcr\.io/|ghcr.nju.edu.cn/|g' "$DATA_SHARE/updater.json"
   sed -i 's|/home-assistant/\(.*-hassio-supervisor\)|/hasscc/\1|g' "$DATA_SHARE/updater.json"
+fi
+if [ -f "$DATA_SHARE/config.json" ]; then
+  sed -i 's|ghcr\.io/home-assistant|ghcr.nju.edu.cn/hasscc|g' "$DATA_SHARE/config.json"
 fi
 
 deb="/opt/hassio.deb"
